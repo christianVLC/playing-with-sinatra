@@ -1,0 +1,20 @@
+---
+####
+profiles:
+ - profile::temperatures_packages::init
+ - profile::nginx::server
+ - profile::sinatra::init
+
+
+##### profile nginx
+nginx::nginx_vhosts:
+  blog:
+    listen_port: 80
+    use_default_location: false
+
+nginx::nginx_locations:
+  /:
+    vhost: blog
+    location_custom_cfg:
+      proxy_pass: "http://localhost:3000"
+
