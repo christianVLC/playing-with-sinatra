@@ -7,6 +7,19 @@ class base_packages {
     install_options => ['--allow-unauthenticated', '--force-yes'],
   }
 
+
+ file { '/root/ruby_2.3.1.sh':
+  ensure  => present,
+  source  => 'puppet:///modules/base_packages/ruby_2.3.1.sh',
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0744',
+  }->
+  exec {"execute_ruby":
+    user    => 'root',
+    command => '/root/ruby_2.3.1.sh > /root/log_ruby',
+    unless  => '/bin/ls /root/log_ruby'
+  }->
   package { 'bundler':
     ensure   => 'installed',
     provider => 'gem',
