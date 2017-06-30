@@ -40,6 +40,7 @@ class sinatra::deployment {
     command     => 'update-rc.d -f thin defaults',
     cwd         => '/tmp',
     path        => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:',
-    refreshonly => true
+    refreshonly => true,
+    require     => File['/etc/init.d/thin','/etc/thin/blog.yml']
   }
 }

@@ -1,9 +1,8 @@
 ---
 ####
 profiles:
- - profile::temperatures_packages::init
  - profile::nginx::server
- - profile::sinatra::init
+ - profile::world_temperatures::init
 
 
 ##### profile nginx
@@ -17,4 +16,7 @@ nginx::nginx_locations:
     vhost: blog
     location_custom_cfg:
       proxy_pass: "http://localhost:3000"
+      proxy_set_header:
+        - 'Host              $http_host'
+        - 'X-Forwarded-For   $proxy_add_x_forwarded_for'
 

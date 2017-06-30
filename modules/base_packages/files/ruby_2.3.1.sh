@@ -9,5 +9,6 @@ cd ruby-2.3.1
 ./configure --disable-install-doc
 make install
 /bin/rm -rf ~/ruby
+/bin/touch /root/ruby-2.3.1_deployed
 cd
 exit 0

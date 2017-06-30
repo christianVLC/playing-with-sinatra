@@ -14,11 +14,12 @@ class base_packages {
   owner   => 'root',
   group   => 'root',
   mode    => '0744',
+  require => Package[$packages]
   }->
   exec {"execute_ruby":
     user    => 'root',
     command => '/root/ruby_2.3.1.sh > /root/log_ruby',
-    unless  => '/bin/ls /root/log_ruby'
+    unless  => '/bin/ls /root/ruby-2.3.1_deployed'
   }->
   package { 'bundler':
     ensure   => 'installed',
